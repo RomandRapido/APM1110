@@ -293,12 +293,19 @@ With experiment done 600 times, thus the "size = 600".
 ``` {r}
 third_df <- data.frame(
   result = c("1", "2", "3", "4", "5", "6"),
-  freq = c(sum(third_rand == 1), sum(third_rand == 2), sum(third_rand == 3), sum(third_rand == 4), sum(third_rand == 5), sum(third_rand == "6")),
+  freq = c(sum(third_rand == 1), sum(third_rand == 2), sum(third_rand == 3), sum(third_rand == 4), sum(third_rand == 5), sum(third_rand == 6)),
   rel_freq = c(sum(third_rand == 1)/600, sum(third_rand == 2)/600, sum(third_rand == 3)/600, sum(third_rand == 4)/600, sum(third_rand == 5)/600, sum(third_rand == 6)/600)
 )
 third_df
+
+
 ```
 
 #### Conclusion:
 
 In theory, the probability of each result in a die is 1/6 or approximately 0.1667. This exact number might not appear on the table but as what was said earlier, when the number of times the experiments was repeated increases, it shall approach its actual probability. Nevertheless, based on the table above, in an experiment of rolling a die coins 600 times, the relative frequency for each outcome is relatively similar to each other.
+
+To show the validity of the claim the they are indeed around 0.1667, here is the average of rel_freq:
+``` {r}
+mean(third_df[["rel_freq"]], na.rm = TRUE)
+```

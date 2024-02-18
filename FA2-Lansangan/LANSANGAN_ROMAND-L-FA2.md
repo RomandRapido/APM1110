@@ -54,14 +54,14 @@ a_df
 ```
 
     ##   result freq_100 freq_1000 freq_10000 freq_100000 freq_1000000 freq_10000000
-    ## 1  Heads       55       487       4966       50135       500097       4998128
-    ## 2  Tails       45       513       5034       49865       499903       5001872
+    ## 1  Heads       49       497       4956       50122       499708       4997826
+    ## 2  Tails       51       503       5044       49878       500292       5002174
     ##   rel_freq_100 rel_freq_1000 rel_freq_10000 rel_freq_100000 rel_freq_1000000
-    ## 1         0.55         0.487         0.4966         0.50135         0.500097
-    ## 2         0.45         0.513         0.5034         0.49865         0.499903
+    ## 1         0.49         0.497         0.4956         0.50122         0.499708
+    ## 2         0.51         0.503         0.5044         0.49878         0.500292
     ##   rel_freq_10000000
-    ## 1         0.4998128
-    ## 2         0.5001872
+    ## 1         0.4997826
+    ## 2         0.5002174
 
 Where freq_100 is equivalent to frequency under 100 experiment size—and
 so on.
@@ -150,14 +150,14 @@ b_df
 ```
 
     ##   result freq_100 freq_1000 freq_10000 freq_100000 freq_1000000 freq_10000000
-    ## 1    Red       46       500       5027       50040       499303       5000477
-    ## 2  Black       54       500       4973       49960       500697       4999523
+    ## 1    Red       52       494       4932       49751       500469       5000259
+    ## 2  Black       48       506       5068       50249       499531       4999741
     ##   rel_freq_100 rel_freq_1000 rel_freq_10000 rel_freq_100000 rel_freq_1000000
-    ## 1         0.46           0.5         0.5027          0.5004         0.499303
-    ## 2         0.54           0.5         0.4973          0.4996         0.500697
+    ## 1         0.52         0.494         0.4932         0.49751         0.500469
+    ## 2         0.48         0.506         0.5068         0.50249         0.499531
     ##   rel_freq_10000000
-    ## 1         0.5000477
-    ## 2         0.4999523
+    ## 1         0.5000259
+    ## 2         0.4999741
 
 Similar to the above item, freq_100 is equivalent to frequency under 100
 experiment size—and so on.
@@ -241,14 +241,14 @@ c_df
 ```
 
     ##   result freq_100 freq_1000 freq_10000 freq_100000 freq_1000000 freq_10000000
-    ## 1   Even       54       500       5001       50031       499936       4999383
-    ## 2    Odd       46       500       4999       49969       500064       5000617
+    ## 1   Even       45       505       4966       50005       500008       5000368
+    ## 2    Odd       55       495       5034       49995       499992       4999632
     ##   rel_freq_100 rel_freq_1000 rel_freq_10000 rel_freq_100000 rel_freq_1000000
-    ## 1         0.54           0.5         0.5001         0.50031         0.499936
-    ## 2         0.46           0.5         0.4999         0.49969         0.500064
+    ## 1         0.45         0.505         0.4966         0.50005         0.500008
+    ## 2         0.55         0.495         0.5034         0.49995         0.499992
     ##   rel_freq_10000000
-    ## 1         0.4999383
-    ## 2         0.5000617
+    ## 1         0.5000368
+    ## 2         0.4999632
 
 Similar to the above items, freq_100 is equivalent to frequency under
 100 experiment size—and so on.
@@ -325,9 +325,9 @@ sec_df
 ```
 
     ##      result freq rel_freq
-    ## 1 Two Heads   25     0.25
-    ## 2 Two Tails   27     0.27
-    ## 3     Split   48     0.48
+    ## 1 Two Heads   26     0.26
+    ## 2 Two Tails   25     0.25
+    ## 3     Split   49     0.49
 
 #### Conclusion:
 
@@ -364,18 +364,18 @@ With experiment done 600 times, thus the “size = 600”.
 ``` r
 third_df <- data.frame(
   result = c("1", "2", "3", "4", "5", "6"),
-  freq = c(sum(third_rand == 1), sum(third_rand == 2), sum(third_rand == 3), sum(third_rand == 4), sum(third_rand == 5), sum(third_rand == "6")),
+  freq = c(sum(third_rand == 1), sum(third_rand == 2), sum(third_rand == 3), sum(third_rand == 4), sum(third_rand == 5), sum(third_rand == 6)),
   rel_freq = c(sum(third_rand == 1)/600, sum(third_rand == 2)/600, sum(third_rand == 3)/600, sum(third_rand == 4)/600, sum(third_rand == 5)/600, sum(third_rand == 6)/600)
 )
 third_df
 ```
 
     ##   result freq  rel_freq
-    ## 1      1  111 0.1850000
-    ## 2      2   95 0.1583333
-    ## 3      3  111 0.1850000
-    ## 4      4  103 0.1716667
-    ## 5      5   77 0.1283333
+    ## 1      1   97 0.1616667
+    ## 2      2  114 0.1900000
+    ## 3      3   91 0.1516667
+    ## 4      4   93 0.1550000
+    ## 5      5  102 0.1700000
     ## 6      6  103 0.1716667
 
 #### Conclusion:
@@ -387,3 +387,12 @@ was repeated increases, it shall approach its actual probability.
 Nevertheless, based on the table above, in an experiment of rolling a
 die coins 600 times, the relative frequency for each outcome is
 relatively similar to each other.
+
+To show the validity of the claim the they are indeed around 0.1667,
+here is the average of rel_freq:
+
+``` r
+mean(third_df[["rel_freq"]], na.rm = TRUE)
+```
+
+    ## [1] 0.1666667

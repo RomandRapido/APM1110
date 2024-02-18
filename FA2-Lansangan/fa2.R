@@ -26,6 +26,7 @@ a_df <- data.frame(
   rel_freq_10000000 = c(sum(a_10000000 == "H")/10000000, sum(a_10000000 == "T")/10000000)
 )
 
+createTable(a_df[, c(1, 8:13)])
 library(ggplot2)
 
 a_long_df <- tidyr::pivot_longer(a_df, cols = starts_with("rel_freq"),
@@ -143,7 +144,6 @@ ggplot(c_long_df, aes(x = sample_size, y = rel_freq, color = result)) +
 #2.
 twoCoins <- c("HH", "TT","HT","TH")
 sec_rand <- sample(twoCoins, size = 100, replace = TRUE)
-sec_tab <- table(sec_rand)
 
 sec_df <- data.frame(
   result = c("Two Heads", "Two Tails", "Split"),
@@ -161,24 +161,27 @@ die <- c(1, 2, 3, 4, 5, 6)
 third_rand <- sample(die, size = 600, replace = TRUE)
 third_df <- data.frame(
   result = c("1", "2", "3", "4", "5", "6"),
-  freq = c(sum(third_rand == 1), sum(third_rand == 2), sum(third_rand == 3), sum(third_rand == 4), sum(third_rand == 5), sum(third_rand == "6")),
+  freq = c(sum(third_rand == 1), sum(third_rand == 2), sum(third_rand == 3), sum(third_rand == 4), sum(third_rand == 5), sum(third_rand == 6)),
   rel_freq = c(sum(third_rand == 1)/600, sum(third_rand == 2)/600, sum(third_rand == 3)/600, sum(third_rand == 4)/600, sum(third_rand == 5)/600, sum(third_rand == 6)/600)
 )
 third_df
 #same with 2
 
+mean(third_df$rel_freq, na.rm = TRUE)
 
 
-library(kableExtra)
-basic_table <- kable(a_df[, 0:7], "html")
-
-styled_table <- basic_table %>%
-  kable_styling(
-    full_width = FALSE,
-    bootstrap_options = c("striped", "hover", "condensed"),
-    position = "center"
-  ) %>%
-  row_spec(0, bold = TRUE, color = "white", background = "#3498db") %>%
-  column_spec(1, background = "#ecf0f1", color = "#2c3e50", bold = TRUE)
-
-print(styled_table)
+createTable <- function(table) {
+  library(kableExtra)
+  basic_table <- kable(table, "html")
+  
+  styled_table <- basic_table %>%
+    kable_styling(
+      full_width = FALSE,
+      bootstrap_options = c("striped", "hover", "condensed"),
+      position = "center"
+    ) %>%
+    row_spec(0, bold = TRUE, color = "white", background = "#3498db") %>%
+    column_spec(1, background = "#ecf0f1", color = "#2c3e50", bold = TRUE)
+  
+  print(styled_table)
+}
