@@ -1,8 +1,4 @@
-# 1. Use R to illustrate that the probability of getting:
-#   
-#   (a) a head is 0.5 if a fair coin is tossed repeatedly;
-# (b) a red card is 0.5 if cards are drawn repeatedly with replacement from awell-shuffled deck;
-# (c) an even number is 0.5 if a fair die is rolled repeatedly.
+# 1.
 
 headsOrTails <- c("H", "T")
 
@@ -144,10 +140,7 @@ ggplot(c_long_df, aes(x = sample_size, y = rel_freq, color = result)) +
 
 
 
-#2. An experiment consists of tossing two fair coins. 
-#Use R to simulate this experiment 100 times and obtain the relative frequency of 
-#each possible outcome. Hence, estimate the probability of getting one head and 
-#one tail in any order.
+#2.
 twoCoins <- c("HH", "TT","HT","TH")
 sec_rand <- sample(twoCoins, size = 100, replace = TRUE)
 sec_tab <- table(sec_rand)
@@ -162,9 +155,7 @@ sec_df
 
 
 
-#3. An experiment consists of rolling a die. Use R to simulate this experiment 600 times
-#and obtain the relative frequency of each possible outcome. Hence, estimate the probability
-#of getting each of 1, 2, 3, 4, 5, and 6.
+#3
 die <- c(1, 2, 3, 4, 5, 6)
 
 third_rand <- sample(die, size = 600, replace = TRUE)
@@ -175,3 +166,19 @@ third_df <- data.frame(
 )
 third_df
 #same with 2
+
+
+
+library(kableExtra)
+basic_table <- kable(a_df[, 0:7], "html")
+
+styled_table <- basic_table %>%
+  kable_styling(
+    full_width = FALSE,
+    bootstrap_options = c("striped", "hover", "condensed"),
+    position = "center"
+  ) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#3498db") %>%
+  column_spec(1, background = "#ecf0f1", color = "#2c3e50", bold = TRUE)
+
+print(styled_table)
