@@ -88,7 +88,7 @@ ggplot(a_long_df, aes(x = sample_size, y = rel_freq, color = result)) +
   geom_hline(yintercept = 0.5, linetype = "dashed", color = "red")
 ```
 
-As one can notice, as the size of the experiment becomes larger, the relative frequency for both outcome (heads and tails) approaches 0.50. This goes to show that the probability of both heads and tails is $\textbf{0.50}$.
+As one can notice, as the size of the experiment becomes larger, the relative frequency for both outcome (heads and tails) approaches 0.50. This goes to show that the probability of both heads and tails is $\textbf{0.50}$—making the initial statement, "head is 0.5 if a fair coin is tossed repeatedly," $\textbf{true}$.
 
 
 
@@ -162,7 +162,7 @@ ggplot(b_long_df, aes(x = sample_size, y = rel_freq, color = result)) +
   geom_hline(yintercept = 0.5, linetype = "dashed", color = "red")
 ```
 
-Similar to the graph in the first item (a), both outcome seems to be approaching 0.50 and thus the probability for both red and black is $\textbf{0.50}$.
+Similar to the graph in the first item (a), both outcome seems to be approaching 0.50 and thus the probability for both red and black is $\textbf{0.50}$—making the initial statement, "red card is 0.5 if cards are drawn repeatedly with replacement from a well-shuffled deck," $\textbf{true}$.
 
 
 #### c) an even number is 0.5 if a fair die is rolled repeatedly.
@@ -234,7 +234,7 @@ ggplot(c_long_df, aes(x = sample_size, y = rel_freq, color = result)) +
   theme_minimal() +
   geom_hline(yintercept = 0.5, linetype = "dashed", color = "red")
 ```
-Similar to the graphs of both numbers above, both outcome seems to be approaching 0.50 and thus the probability for both odd and even numbers is $\textbf{0.50}$.
+Similar to the graphs of both numbers above, both outcome seems to be approaching 0.50 and thus the probability for both odd and even numbers is $\textbf{0.50}$—making the initial statement, "an even number is 0.5 if a fair die is rolled repeatedly," $\textbf{true}$.
 
 
 #### Conclusion:
@@ -305,7 +305,7 @@ third_df
 
 In theory, the probability of each result in a die is 1/6 or approximately 0.1667. This exact number might not appear on the table but as what was said earlier, when the number of times the experiments was repeated increases, it shall approach its actual probability. Nevertheless, based on the table above, in an experiment of rolling a die coins 600 times, the relative frequency for each outcome is relatively similar to each other.
 
-To show the validity of the claim the they are indeed around 0.1667, here is the average of rel_freq:
+To show the validity of the claim that they are indeed around 0.1667, here is the average of rel_freq:
 ``` {r}
 mean(third_df[["rel_freq"]], na.rm = TRUE)
 ```

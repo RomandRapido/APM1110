@@ -54,14 +54,14 @@ a_df
 ```
 
     ##   result freq_100 freq_1000 freq_10000 freq_100000 freq_1000000 freq_10000000
-    ## 1  Heads       49       497       4956       50122       499708       4997826
-    ## 2  Tails       51       503       5044       49878       500292       5002174
+    ## 1  Heads       54       507       5078       50203       500072       5000963
+    ## 2  Tails       46       493       4922       49797       499928       4999037
     ##   rel_freq_100 rel_freq_1000 rel_freq_10000 rel_freq_100000 rel_freq_1000000
-    ## 1         0.49         0.497         0.4956         0.50122         0.499708
-    ## 2         0.51         0.503         0.5044         0.49878         0.500292
+    ## 1         0.54         0.507         0.5078         0.50203         0.500072
+    ## 2         0.46         0.493         0.4922         0.49797         0.499928
     ##   rel_freq_10000000
-    ## 1         0.4997826
-    ## 2         0.5002174
+    ## 1         0.5000963
+    ## 2         0.4999037
 
 Where freq_100 is equivalent to frequency under 100 experiment size—and
 so on.
@@ -100,7 +100,8 @@ ggplot(a_long_df, aes(x = sample_size, y = rel_freq, color = result)) +
 As one can notice, as the size of the experiment becomes larger, the
 relative frequency for both outcome (heads and tails) approaches 0.50.
 This goes to show that the probability of both heads and tails is
-$\textbf{0.50}$.
+$\textbf{0.50}$—making the initial statement, “head is 0.5 if a fair
+coin is tossed repeatedly,” $\textbf{true}$.
 
 #### b) red card is 0.5 if cards are drawn repeatedly with replacement from awell-shuffled deck;
 
@@ -150,14 +151,14 @@ b_df
 ```
 
     ##   result freq_100 freq_1000 freq_10000 freq_100000 freq_1000000 freq_10000000
-    ## 1    Red       52       494       4932       49751       500469       5000259
-    ## 2  Black       48       506       5068       50249       499531       4999741
+    ## 1    Red       46       503       4912       50208       500343       5001375
+    ## 2  Black       54       497       5088       49792       499657       4998625
     ##   rel_freq_100 rel_freq_1000 rel_freq_10000 rel_freq_100000 rel_freq_1000000
-    ## 1         0.52         0.494         0.4932         0.49751         0.500469
-    ## 2         0.48         0.506         0.5068         0.50249         0.499531
+    ## 1         0.46         0.503         0.4912         0.50208         0.500343
+    ## 2         0.54         0.497         0.5088         0.49792         0.499657
     ##   rel_freq_10000000
-    ## 1         0.5000259
-    ## 2         0.4999741
+    ## 1         0.5001375
+    ## 2         0.4998625
 
 Similar to the above item, freq_100 is equivalent to frequency under 100
 experiment size—and so on.
@@ -191,7 +192,9 @@ ggplot(b_long_df, aes(x = sample_size, y = rel_freq, color = result)) +
 
 Similar to the graph in the first item (a), both outcome seems to be
 approaching 0.50 and thus the probability for both red and black is
-$\textbf{0.50}$.
+$\textbf{0.50}$—making the initial statement, “red card is 0.5 if cards
+are drawn repeatedly with replacement from a well-shuffled deck,”
+$\textbf{true}$.
 
 #### c) an even number is 0.5 if a fair die is rolled repeatedly.
 
@@ -241,14 +244,14 @@ c_df
 ```
 
     ##   result freq_100 freq_1000 freq_10000 freq_100000 freq_1000000 freq_10000000
-    ## 1   Even       45       505       4966       50005       500008       5000368
-    ## 2    Odd       55       495       5034       49995       499992       4999632
+    ## 1   Even       53       523       5004       50208       499461       5002783
+    ## 2    Odd       47       477       4996       49792       500539       4997217
     ##   rel_freq_100 rel_freq_1000 rel_freq_10000 rel_freq_100000 rel_freq_1000000
-    ## 1         0.45         0.505         0.4966         0.50005         0.500008
-    ## 2         0.55         0.495         0.5034         0.49995         0.499992
+    ## 1         0.53         0.523         0.5004         0.50208         0.499461
+    ## 2         0.47         0.477         0.4996         0.49792         0.500539
     ##   rel_freq_10000000
-    ## 1         0.5000368
-    ## 2         0.4999632
+    ## 1         0.5002783
+    ## 2         0.4997217
 
 Similar to the above items, freq_100 is equivalent to frequency under
 100 experiment size—and so on.
@@ -281,7 +284,8 @@ ggplot(c_long_df, aes(x = sample_size, y = rel_freq, color = result)) +
 ![](LANSANGAN_ROMAND-L-FA2_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 Similar to the graphs of both numbers above, both outcome seems to be
 approaching 0.50 and thus the probability for both odd and even numbers
-is $\textbf{0.50}$.
+is $\textbf{0.50}$—making the initial statement, “an even number is 0.5
+if a fair die is rolled repeatedly,” $\textbf{true}$.
 
 #### Conclusion:
 
@@ -325,9 +329,9 @@ sec_df
 ```
 
     ##      result freq rel_freq
-    ## 1 Two Heads   26     0.26
+    ## 1 Two Heads   28     0.28
     ## 2 Two Tails   25     0.25
-    ## 3     Split   49     0.49
+    ## 3     Split   47     0.47
 
 #### Conclusion:
 
@@ -371,12 +375,12 @@ third_df
 ```
 
     ##   result freq  rel_freq
-    ## 1      1   97 0.1616667
-    ## 2      2  114 0.1900000
-    ## 3      3   91 0.1516667
-    ## 4      4   93 0.1550000
-    ## 5      5  102 0.1700000
-    ## 6      6  103 0.1716667
+    ## 1      1  105 0.1750000
+    ## 2      2   90 0.1500000
+    ## 3      3  103 0.1716667
+    ## 4      4   97 0.1616667
+    ## 5      5  108 0.1800000
+    ## 6      6   97 0.1616667
 
 #### Conclusion:
 
@@ -388,7 +392,7 @@ Nevertheless, based on the table above, in an experiment of rolling a
 die coins 600 times, the relative frequency for each outcome is
 relatively similar to each other.
 
-To show the validity of the claim the they are indeed around 0.1667,
+To show the validity of the claim that they are indeed around 0.1667,
 here is the average of rel_freq:
 
 ``` r
