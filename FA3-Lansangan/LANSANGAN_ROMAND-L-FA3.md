@@ -300,9 +300,9 @@ $$
 Thus, the probability that “1” was transmitted given than a “1” was
 received is
 
-\$\$ P(B\|E\_{1}) ~ or ~ 86.54 %
-
-\$\$
+$$
+P(B|E_{1}) \approx 0.8653846 ~ or ~ 86.54 \% 
+$$
 
 ### 2)
 
@@ -362,9 +362,9 @@ $$
 Thus, the total probability of getting an error (overall percentage of
 error) between the three is
 
-\$\$ P(E) = 0.029 ~ or ~ 2.9 %
-
-\$\$
+$$
+P(E) = 0.029 ~ or ~ 2.9 \% 
+$$
 
 #### B) If a program is found with an error, who is the most likely person to have written it?
 
@@ -391,6 +391,6 @@ dataTable_2[which.max(dataTable_2$error_prob_rel_to_total), "employee"]
     ## [1] "Amy"
 
 Since $Amy$ has the highest probability to commit an error (relative to
-the total), with a probability of $0.015$ or \$1.5 % \$, if a program is
-found with an error, she will most likely be the person who has written
-it.
+the total), with a probability of $0.015$ or \$1.5 % \$ , if a program
+is found with an error, she will most likely be the person who has
+written it.
