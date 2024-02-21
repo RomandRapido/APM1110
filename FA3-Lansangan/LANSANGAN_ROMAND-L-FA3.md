@@ -221,7 +221,7 @@ text(label_coords[2,1], label_coords[2,2], labels = "Probability of being RECEIV
 Since we are calculating for the probability that a “1” was received,
 the “receiver” must only receive one and it doesn’t particularly matter
 if it’s either “0” or “1” was originally transmitted. With this in mind,
-because the two cases mentioned above were mutually exclusive (deu to
+because the two cases mentioned above were mutually exclusive (due to
 the fact that they can’t happen at the same time), we can use the Law of
 Total Probability.
 
@@ -231,7 +231,7 @@ The Law of Total Probability is defined as the following:
 
 If a sample space $S$ can be partitioned into k mutually exclusive and
 exhaustive events, $A_{1}$, $A_{2}$, $A_{3}$, … , $A_{k}$, then for any
-event E:
+event $E$:
 
 $$
 P(E) = P(A_{1})P(E|A_{1}) + P(A_{2})P(E|A_{2}) + P(A_{3})P(E|{A_{3}}) + ... P(A_{k})P(E|A_{k})
@@ -346,7 +346,9 @@ $$
     ## [1] 0.029
 
 Thus, the total probability of getting an error (overall percentage of
-error) between the three is $$
+error) between the three is
+
+$$
 P(E) = 0.029~or~2.9\% 
 $$
 
