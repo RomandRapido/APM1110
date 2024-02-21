@@ -227,3 +227,6 @@ Thus, the probability that "1" was transmitted given than a "1" was received is
 $$
 P(B|E_{1}) \approx 0.8653
 $$
+
+### 2)
+There are three employees working at an IT company: Jane, Amy, and Ava, doing 10%, 30%, and 60% of the programming, respectively. 8% of Jane’s work, 5% of Amy’s work, and just 1% of Ava‘s work is in error. What is the overall percentage of error? If a program is found with an error, who is the most likely person to have written it? 
