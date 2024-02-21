@@ -146,8 +146,8 @@ Let $B$ be the case in which the “sender” sent “1”.
 
 For calculating the probability of “1” being received, we have 2
 possibilities. One being that the “sender” sent “1” and it was correctly
-received ($P(B \cap E_{1})$) and the “sender” transmitted “0” and was
-incorrectly received ($P(A \cap E_{1})$). With all that in mind, we’ll
+received ( $P(B \cap E_{1})$ ) and the “sender” transmitted “0” and was
+incorrectly received ( $P(A \cap E_{1})$ ). With all that in mind, we’ll
 have the following:
 
 The probability of the event where “0” was transmitted and was
@@ -239,7 +239,9 @@ $$
 P(E) = P(A_{1})P(E|A_{1}) + P(A_{2})P(E|A_{2}) + P(A_{3})P(E|{A_{3}}) + ... P(A_{k})P(E|A_{k})
 $$
 
-With that, we’ll have $$
+With that, we’ll have
+
+$$
 P(E_{1}) = P(E_{1}|A)P(A) + P(E_{1}|B)P(B)
 $$
 
@@ -253,7 +255,9 @@ $$
 
     ## [1] 0.26
 
-Thus, the total probability of receiving a “1” is: $$
+Thus, the total probability of receiving a “1” is:
+
+$$
 P(E_{1}) = 0.26
 $$
 

@@ -112,7 +112,7 @@ Let $A$ be the case in which the "sender" sent "0";
 
 Let $B$ be the case in which the "sender" sent "1".
 
-For calculating the probability of "1" being received, we have 2 possibilities. One being that the "sender" sent "1" and it was correctly received ($P(B \cap E_{1})$) and the "sender" transmitted "0" and was incorrectly received ($P(A \cap E_{1})$).
+For calculating the probability of "1" being received, we have 2 possibilities. One being that the "sender" sent "1" and it was correctly received ( $P(B \cap E_{1})$ ) and the "sender" transmitted "0" and was incorrectly received ( $P(A \cap E_{1})$ ).
 With all that in mind, we'll have the following:
 
 The probability of the event where "0" was transmitted and was incorrectly received is denoted as:
@@ -190,6 +190,7 @@ $$
 
 
 With that, we'll have
+
 $$
 P(E_{1}) = P(E_{1}|A)P(A) + P(E_{1}|B)P(B)
 $$
@@ -202,6 +203,7 @@ $$
 0.035 + 0.225
 ```
 Thus, the total probability of receiving a "1" is:
+
 $$
 P(E_{1}) = 0.26
 $$
