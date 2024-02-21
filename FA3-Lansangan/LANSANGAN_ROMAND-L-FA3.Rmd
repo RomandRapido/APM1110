@@ -101,6 +101,7 @@ To calculate the probability of message being correctly (and wrongly) received, 
 ##### Multiplication Law of Probability:
 
 The Multiplication Law of Probability is defined as the following:
+
 $$
 P(E_{1} \cap E_{2}) = P(E_{2}|E_{1})P(E_{1})
 $$
@@ -148,6 +149,7 @@ $$
 ``` {r}
 0.75 * 0.30
 ```
+
 $$
 P(B \cap E_{1}) = 0.225
 $$
@@ -214,6 +216,7 @@ We can rewrite this particular problem as a conditional probability:
 
 ##### Conditional Probability:
 The conditional probability is defined as
+
 $$
 P(E_{2}|E_{1}) = \frac{P(E_{2} \cap E_{1})}{P(E_{1})}
 $$
@@ -227,6 +230,7 @@ P(B|E_{1}) = \frac{P(B \cap E_{1})}{P(E_{1})}
 $$
 
 Substituting the values we get:
+
 $$
 P(B|E_{1}) = \frac{0.225}{0.26}
 $$
@@ -234,6 +238,7 @@ $$
 0.225/0.26
 ```
 Thus, the probability that "1" was transmitted given than a "1" was received is
+
 $$
 P(B|E_{1}) \approx 0.8653846~or~86.54\%
 $$
@@ -260,6 +265,7 @@ dataTable_2
 This is a straightforward problem that requires both the Law of Multiplication of Probability and Law of Total Probability—both of which are mentioned earlier.
 
 ##### Solution:
+
 Let $A_{1}$ be Jane's worload;
 
 Let $A_{2}$ be Amy's workload;
@@ -269,6 +275,7 @@ Let $A_{3}$ be Ava's workload.
 Let $E$ be the event in which their work produced an error or two.
 
 Using the Law of Total Probability, we will have
+
 $$
 P(E) = P(A_{1})P(E|A_{1}) + P(A_{2})P(E|A_{2}) + P(A_{3})P(E|{A_{3}})
 $$
@@ -301,4 +308,4 @@ dataTable_2
 dataTable_2[which.max(dataTable_2$error_prob_rel_to_total), "employee"]
 ```
 
-Since $Amy$ has the highest probability to commit an error (relative to the total), with a probability of $0.015$ or $1.5\%$, if a program is found with an error, $she~will~most~likely~be~the~person~who~has~written~it$.  
+Since $Amy$ has the highest probability to commit an error (relative to the total), with a probability of $0.015$ or $1.5\%$, if a program is found with an error, she will most likely be the person who has written it.  

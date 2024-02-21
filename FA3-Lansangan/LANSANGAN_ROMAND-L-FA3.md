@@ -132,7 +132,9 @@ received, we shall use the Multiplication Law of Probability.
 
 ##### Multiplication Law of Probability:
 
-The Multiplication Law of Probability is defined as the following: $$
+The Multiplication Law of Probability is defined as the following:
+
+$$
 P(E_{1} \cap E_{2}) = P(E_{2}|E_{1})P(E_{1})
 $$
 
@@ -265,7 +267,9 @@ We can rewrite this particular problem as a conditional probability:
 
 ##### Conditional Probability:
 
-The conditional probability is defined as $$
+The conditional probability is defined as
+
+$$
 P(E_{2}|E_{1}) = \frac{P(E_{2} \cap E_{1})}{P(E_{1})}
 $$
 
@@ -277,7 +281,9 @@ $$
 P(B|E_{1}) = \frac{P(B \cap E_{1})}{P(E_{1})}
 $$
 
-Substituting the values we get: $$
+Substituting the values we get:
+
+$$
 P(B|E_{1}) = \frac{0.225}{0.26}
 $$
 
@@ -288,7 +294,9 @@ $$
     ## [1] 0.8653846
 
 Thus, the probability that “1” was transmitted given than a “1” was
-received is $$
+received is
+
+$$
 P(B|E_{1}) \approx 0.8653846~or~86.54\%
 $$
 
@@ -333,7 +341,9 @@ Let $A_{3}$ be Ava’s workload.
 
 Let $E$ be the event in which their work produced an error or two.
 
-Using the Law of Total Probability, we will have $$
+Using the Law of Total Probability, we will have
+
+$$
 P(E) = P(A_{1})P(E|A_{1}) + P(A_{2})P(E|A_{2}) + P(A_{3})P(E|{A_{3}})
 $$ Substituting the values will give us $$
 P(E) = (0.1 \times 0.08) + (0.3 \times 0.05) + (0.6 \times 0.01)
@@ -378,5 +388,5 @@ dataTable_2[which.max(dataTable_2$error_prob_rel_to_total), "employee"]
 
 Since $Amy$ has the highest probability to commit an error (relative to
 the total), with a probability of $0.015$ or $1.5\%$, if a program is
-found with an error,
-$she~will~most~likely~be~the~person~who~has~written~it$.
+found with an error, she will most likely be the person who has written
+it.
