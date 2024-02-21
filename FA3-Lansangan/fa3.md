@@ -21,12 +21,12 @@ transmitted as a 0. If a signal is sent, determine the probability that:
 #### Data:
 
 ``` r
-dataTable <- data.frame(
+dataTable_1 <- data.frame(
   message = c(0, 1),
   trans_prob = c(0.70, 0.30),
   rec_prob = c(0.95, 0.75)
 )
-dataTable
+dataTable_1
 ```
 
     ##   message trans_prob rec_prob
@@ -376,5 +376,5 @@ dataTable_2[which.max(dataTable_2$error_prob_rel_to_total), "employee"]
 
 Since $Amy$ has the highest probability to commit an error (relative to
 the total), with a probability of $0.015$ or $1.5\%$, if a program is
-found with an error, she will most likely be the person who has written
-it.
+found with an error,
+$she~will~most~likely~be~the~person~who~has~written~it$.

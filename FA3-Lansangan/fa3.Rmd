@@ -20,12 +20,12 @@ determine the probability that:
 
 #### Data:
 ``` {r}
-dataTable <- data.frame(
+dataTable_1 <- data.frame(
   message = c(0, 1),
   trans_prob = c(0.70, 0.30),
   rec_prob = c(0.95, 0.75)
 )
-dataTable
+dataTable_1
 ```
 
 Where trans_prob is the probability of a message being transmitted and rec_prob as the probability of them being received correctly.
@@ -300,4 +300,4 @@ dataTable_2
 dataTable_2[which.max(dataTable_2$error_prob_rel_to_total), "employee"]
 ```
 
-Since $Amy$ has the highest probability to commit an error (relative to the total), with a probability of $0.015$ or $1.5\%$, if a program is found with an error, she will most likely be the person who has written it.  
+Since $Amy$ has the highest probability to commit an error (relative to the total), with a probability of $0.015$ or $1.5\%$, if a program is found with an error, $she~will~most~likely~be~the~person~who~has~written~it$.  
