@@ -301,7 +301,13 @@ Thus, the probability that “1” was transmitted given than a “1” was
 received is
 
 $$
-P(B|E_{1}) \approx 0.8653846 ~ or ~ 86.54\%
+P(B|E_{1}) \approx 0.8653846
+$$
+
+or
+
+$$
+86.54\%
 $$
 
 ### 2)
