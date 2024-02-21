@@ -156,7 +156,7 @@ plot(g, layout = layout, edge.label = E(g)$label, edge.label.cex = 0.8, vertex.l
      main = "Tree Diagram of Probability for Binary Communication Channel")
 
 label_coords <- matrix(c(
-  -1.35, 0.6,
+  -1, 0.48,
   1.5, -0.18
 ), ncol = 2, byrow = TRUE)
 
