@@ -112,7 +112,7 @@ sum(dataTable_1$Prob_Relevant_Images_Relative_Sample_Space)
 
     ## [1] 0.735
 
-Thus, we have $0.735$ or $73.5 \%$ as the overall percentage.
+Thus, we have $0.735$ or $73.5$% as the overall percentage.
 
 ### 2)
 
@@ -128,7 +128,9 @@ mutually independent.
 
 #### Solution:
 
-A pairwise independence is defined as: $$
+A pairwise independence is defined as:
+
+$$
 P(A \cap B) = P(A)P(B)
 $$ Where A and B is mutually exclusive.
 
@@ -152,7 +154,9 @@ result will be:
 
 $$
 P(E_{k}) = \frac{1}{2}*\frac{1}{2}
-\\
+$$
+
+$$
 P(E_k) = (\frac{1}{2})^2
 $$
 
@@ -174,9 +178,13 @@ $$
 P(E_k) = \frac{1}{2}
 $$
 
-Also, when tossing a coin twice, there are four possible cases, $$
+Also, when tossing a coin twice, there are four possible cases,
+
+$$
 \{ (H_1, H_2),(T_1, T_2),(H_1, T_2), (T_1, T_2) \}
-$$ Also, as one can notice, if we exhausts all the possible pairs of all
+$$
+
+Also, as one can notice, if we exhausts all the possible pairs of all
 three given events, their intersections will just consists of 1 element.
 
 For $E_1 \cap E_2$ , $E_2 \cap E_3$ , and $E_1 \cap E_3$ alike, its
@@ -230,9 +238,9 @@ $$
 \frac{1}{4} = \frac{1}{4}
 $$
 
-Making each pair a pairwise independent.
+Making all pairs pairwise independent.
 
-##### a. Proving the piecewise independence.
+##### b. Disproving mutual independence.
 
 To test for the mutual independence however, we shall have to following:
 
@@ -249,7 +257,11 @@ P(E_1 \cap E_2 \cap E_3) = \frac{1}{8}
 $$
 
 But if we look at the possible outcomes, only “HH” can be found among
-all three events. Thus making $P(E_1 \cap E_2 \cap E_3) = \frac{1}{4}$.
+all three events. Thus making
+
+$$
+P(E_1 \cap E_2 \cap E_3) = \frac{1}{4}
+$$
 
 However, $\frac{1}{4} \neq \frac{1}{8}$ .
 
