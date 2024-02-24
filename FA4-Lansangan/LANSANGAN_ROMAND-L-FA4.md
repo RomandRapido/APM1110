@@ -17,14 +17,9 @@ dataTable_1 <- data.frame(
   Percentage_of_Images_Supplied = c(15, 20, 25, 40),
   Percentage_of_Relevant_Images = c(50, 60, 80, 85)
 )
-dataTable_1
 ```
 
-    ##   Sensor Percentage_of_Images_Supplied Percentage_of_Relevant_Images
-    ## 1      1                            15                            50
-    ## 2      2                            20                            60
-    ## 3      3                            25                            80
-    ## 4      4                            40                            85
+![](https://github.com/RomandRapido/APM1110/blob/main/FA4-Lansangan/table1.png?raw=true)
 
 What is the overall percentage of relevant images?
 
@@ -41,14 +36,9 @@ and accuracy purposes.
 dataTable_1$Percentage_of_Images_Supplied <- dataTable_1$Percentage_of_Images_Supplied / 100
 dataTable_1$Percentage_of_Relevant_Images <- dataTable_1$Percentage_of_Relevant_Images / 100
 colnames(dataTable_1) <- c("Sensor", "Prob_of_Being_Supplied", "Prob_of_Providing_Relevant_Images")
-dataTable_1
 ```
 
-    ##   Sensor Prob_of_Being_Supplied Prob_of_Providing_Relevant_Images
-    ## 1      1                   0.15                              0.50
-    ## 2      2                   0.20                              0.60
-    ## 3      3                   0.25                              0.80
-    ## 4      4                   0.40                              0.85
+![](https://github.com/RomandRapido/APM1110/blob/main/FA4-Lansangan/table2.png?raw=true)
 
 Let $E$ be the event in which the sensor supplied a relevant image;
 
@@ -81,19 +71,9 @@ With that, we’ll have
 
 ``` r
 dataTable_1$Prob_Relevant_Images_Relative_Sample_Space <- dataTable_1$Prob_of_Being_Supplied * dataTable_1$Prob_of_Providing_Relevant_Images
-dataTable_1
 ```
 
-    ##   Sensor Prob_of_Being_Supplied Prob_of_Providing_Relevant_Images
-    ## 1      1                   0.15                              0.50
-    ## 2      2                   0.20                              0.60
-    ## 3      3                   0.25                              0.80
-    ## 4      4                   0.40                              0.85
-    ##   Prob_Relevant_Images_Relative_Sample_Space
-    ## 1                                      0.075
-    ## 2                                      0.120
-    ## 3                                      0.200
-    ## 4                                      0.340
+![](https://github.com/RomandRapido/APM1110/blob/main/FA4-Lansangan/table3.png?raw=true)
 
 To get the overall percentage of relevant images, we can assert the Law
 of Total Probability:
