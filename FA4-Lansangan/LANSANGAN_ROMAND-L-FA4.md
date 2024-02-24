@@ -120,8 +120,8 @@ A fair coin tossed twice.
 
 Let $E_1$ be the event that both tosses have the same outcome, that is,
 $E_1 = (HH, TT)$ . Let $E_2$ be the event that the first toss is a head,
-that is \$E_2 = (HH, HT) \$ . Let $E_3$ be the event that the second
-toss is a head, that is, $E_3 = (TH, HH)$ .
+that is $E_2 = (HH, HT)$ . Let $E_3$ be the event that the second toss
+is a head, that is, $E_3 = (TH, HH)$ .
 
 Show that $E_1$ , $E_2$ , and $E_2$ are pairwise independent but not
 mutually independent.
@@ -132,7 +132,9 @@ A pairwise independence is defined as:
 
 $$
 P(A \cap B) = P(A)P(B)
-$$ Where A and B is mutually exclusive.
+$$
+
+Where A and B is mutually exclusive.
 
 However, the three pair of events mentioned in the given can only become
 mutually independent if:
