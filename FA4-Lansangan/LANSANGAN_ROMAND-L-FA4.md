@@ -203,11 +203,11 @@ $$
 Substituting the values, we’ll have
 
 $$
-\frac{1}{4} = \frac{1}{2}*\frac{1}{2}
+\frac{1}{4} = \frac{1}{2}\times\frac{1}{2}
 $$
 
 $$
-\frac{1}{4} = \frac{1}{2}*\frac{1}{2}
+\frac{1}{4} = \frac{1}{2}\times\frac{1}{2}
 $$
 
 $$
@@ -231,7 +231,7 @@ P(E_1 \cap E_2 \cap E_3) = P(E_1)P(E_2)P(E_3)
 $$
 
 $$
-P(E_1 \cap E_2 \cap E_3) = \frac{1}{2}*\frac{1}{2}*\frac{1}{2}
+P(E_1 \cap E_2 \cap E_3) = \frac{1}{2}\times\frac{1}{2}\times\frac{1}{2}
 $$
 
 $$
