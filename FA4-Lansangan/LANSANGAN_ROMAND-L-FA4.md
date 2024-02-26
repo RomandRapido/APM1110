@@ -135,7 +135,7 @@ Thus, when we toss two coins successively, the probability of all the
 result will be:
 
 $$
-P(E_{k}) = \frac{1}{2}*\frac{1}{2}
+P(E_{k}) = \frac{1}{2}\times\frac{1}{2}
 $$
 
 $$
@@ -211,7 +211,7 @@ $$
 $$
 
 $$
-\frac{1}{4} = \frac{1}{2}*\frac{1}{2}
+\frac{1}{4} = \frac{1}{2}\times\frac{1}{2}
 $$
 
 Which are all
