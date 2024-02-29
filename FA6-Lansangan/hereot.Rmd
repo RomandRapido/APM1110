@@ -1,0 +1,99 @@
+---
+title: "LANSANGAN_ROMAND-L-FA6"
+output: rmarkdown::github_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+#### Probability and Probability Distribution
+
+#### By Romand Lansangan
+
+### 1) Geometric Distribution
+Provide an R code for the geometric distribution. The geometric distribution is a probability distribution that models the number of trials required to achieve the first success in a sequence of Bernoulli trials, where each trial has a constant probability of success.
+
+#### a.Set the probability of success:  p <- 0.2
+``` {r}
+p <- 0.2
+```
+
+#### b. Generate 1000 random variables from the geometric distribution.
+``` {r}
+random_count <- 1000
+random_var <- rgeom(random_count, p)
+```
+
+#### c.Calculate some basic statistics:
+``` {r}
+mean_var <- mean(random_var)
+
+var_var <- var(random_var)
+
+sd_var <- sd(random_var)
+```
+
+#### d. Print the results in item 3 with the following output (string):
+``` {r}
+results <- list(paste('Number of trials required to achieve first success: ', random_count),
+paste('Mean (in 2 decimal places): ', mean_var),
+paste('Variance (in 2 decimal places): ', var_var), paste('Sandard deviation ( in 2 decimal places): ', sd_var))
+for(i in results){print(i)}
+```
+
+#### e. Plot the histogram of the results.
+``` {r}
+library(ggplot2)
+
+df <- data.frame(Trials = random_var)
+ggplot(df, aes(x = Trials, fill = after_stat(count))) +
+  geom_histogram(color = "white", binwidth = 1, show.legend = FALSE) + 
+  scale_fill_gradient(low = "lightblue", high = "darkblue") +
+  labs(title = "Histogram of Geometric Distribution",
+       x = "Number of Trials",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+As was shown in the histograph,
+
+### 2) Hypergeometric Distribution
+Consider a plant manufacturing IC chips of which 10% are expected to be defective. The chips are packed in boxes for export. Before transportation, a sample is drawn from each box. Estimate the probability that the sample contains more than 10% defectives, when:
+
+
+#### a. A sample of 10 is selected from a box of 40.
+
+Since 10% of 10 is 1, we're interested in avoiding zero defective items. By first finding the probability of drawing zero defective items and subtracting this from 1, we get the probability of drawing at least one defective item. In that way, it will be easy for us to calculate the probability that we desire.
+
+``` {r}
+total <- 40
+sample_size <- 10
+defective_actual <- total * 0.10
+not_defective <- total - defective_actual
+
+probability_0_defective <- phyper(0, defective_actual, not_defective, sample_size)
+
+probability_at_least_1_defective <- 1 - probability_0_defective
+
+probability_at_least_1_defective
+
+```
+
+#### b. A sample of 10 is selected from a box of 5000.
+
+``` {r}
+total <- 5000
+sample_size <- 10
+defective_rate <- 0.10
+
+defective_actual <- total * 0.10
+not_defective <- total - defective_actual
+
+probability_0_defective <- phyper(0, defective_actual, not_defective, sample_size)
+
+probability_at_least_1_defective <- 1 - probability_0_defective
+
+probability_at_least_1_defective
+
+```
