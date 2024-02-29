@@ -1,5 +1,5 @@
 ---
-title: "LANSANGAN_ROMAND-L-FA6"
+title: "Formative Assessment 6"
 output: rmarkdown::github_document
 editor_options: 
   markdown: 
@@ -22,8 +22,8 @@ p <- 0.2
 ``` {r}
 random_count <- 1000
 random_var <- rgeom(random_count, p)
+random_var
 ```
-
 #### c.Calculate some basic statistics:
 ``` {r}
 mean_var <- mean(random_var)
@@ -35,7 +35,7 @@ sd_var <- sd(random_var)
 
 #### d. Print the results in item 3 with the following output (string):
 ``` {r}
-results <- list(paste('Number of trials required to achieve first success: ', random_count),
+results <- list(paste('Number of trials required to achieve first success: ', random_var[1]),
 paste('Mean (in 2 decimal places): ', mean_var),
 paste('Variance (in 2 decimal places): ', var_var), paste('Sandard deviation ( in 2 decimal places): ', sd_var))
 for(i in results){print(i)}
@@ -56,7 +56,7 @@ ggplot(df, aes(x = Trials, fill = after_stat(count))) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-As was shown in the histograph,
+The probability of achieving the desired result in a geometric distribution increases as the number of failures in an experiment increases. Thus the result of the histogram that indicates the frequency (among 1000 random experiments) of achieving the desired result decreases as the number of trials increases.
 
 ### 2) Hypergeometric Distribution
 Consider a plant manufacturing IC chips of which 10% are expected to be defective. The chips are packed in boxes for export. Before transportation, a sample is drawn from each box. Estimate the probability that the sample contains more than 10% defectives, when:
