@@ -1,0 +1,683 @@
+---
+title: "Formative Assessment 5"
+output: rmarkdown::github_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+#### Probability and Probability Distribution
+
+#### By Romand Lansangan
+
+## 1)
+An email message can travel through one of the three server routes. The pertage of errors in ech of the servers and the percentage of mesages that travel through each route are shown in the following table. Assume that the servers are independent.
+
+``` {r}
+item1_table <- data.frame(
+  server_num = c("Server 1", "Server 2", "Server 3"),
+  Percetage_of_Messages = c(40, 25, 35),
+  Percentage_of_Errors = c(1,2,1.5)
+)
+```
+
+Before everything else, let us transpose the given percentage to its decimal form.
+
+``` {r}
+item1_table$Percetage_of_Messages <- item1_table$Percetage_of_Messages/100
+item1_table$Percentage_of_Errors <- item1_table$Percentage_of_Errors/100
+item1_table
+```
+
+#### (a) What is the probability of receiving an email containing an error?
+
+Let $E$ be the event of an email contains an error.
+
+Let $A_1$ be the event in which a message was from Server 1.
+
+Let $A_2$ be the event in which a message was from Server 2.
+
+Let $A_3$ be the event in which a message was from Server 3.
+
+With that, the $E \cap A_k$ where $k \in \{1,2,3\}$ means that an email that travels through a specific server $k$ contains an error.
+
+To calculate the probability for each server being a route for an email containing an error, we shall use the Multiplication Law of Probability. 
+
+Given the event $E_1$ and $E_2$ , the Multiplication Law of Probability is defined as the following:
+
+$$
+P(E_{1} \cap E_{2}) = P(E_{2}|E_{1})P(E_{1})
+$$
+
+Applying the Mulitiplication Law of Probability to the problem:
+
+$$
+P(E \cap A_1) = P(E|A_1)P(A_1)
+$$
+
+$$
+P(E \cap A_2) = P(E|A_2)P(A_2)
+$$
+
+$$
+P(E \cap A_3) = P(E|A_3)P(A_3)
+$$
+
+Note that $P(E|A_1)$ is the percentage of errors given that the message was from Server 1 (i.e. 0.01). This goes the same for the rest of servers.
+
+$$
+P(E \cap A_1) = 0.01 \times 0.40
+$$
+
+$$
+P(E \cap A_2) = 0.02 \times 0.25
+$$
+
+$$
+P(E \cap A_3) = 0.015 \times 0.35
+$$
+
+``` {r}
+item1_table$Error_Relative_to_Server <- item1_table$Percetage_of_Messages * item1_table$Percentage_of_Errors
+item1_table
+```
+
+$$
+P(E \cap A_1) = 0.00400
+$$
+
+$$
+P(E \cap A_2) = 0.00500
+$$
+
+$$
+P(E \cap A_3) = 0.00525
+$$
+
+To calculate for $P(E)$ we shall use the Law of Total Probability. 
+
+The Law of Total Probability is defined as the following:  
+
+If a sample space $S$ can be partitioned into k mutually exclusive and exhaustive events,
+$A_{1}$, $A_{2}$, $A_{3}$, … , $A_{k}$, then for any event $E$:
+
+$$
+P(E) = P(A_{1})P(E|A_{1}) + P(A_{2})P(E|A_{2}) + P(A_{3})P(E|{A_{3}}) + ... P(A_{k})P(E|A_{k})
+$$
+
+Applying the Law of Total Probability to our problem,
+
+$$
+P(E) = P(E \cap A_1) + P(E \cap A_2) + P(E \cap A_3)
+$$
+
+Which is also,
+
+$$
+P(E) = 0.00400 + 0.00500 + 0.00525
+$$
+
+``` {r}
+sum(item1_table$Error_Relative_to_Server)
+```
+The total probability of receiving an email containing an error is 
+$$
+P(E) = 0.01425
+$$
+
+#### (b) What is the probability that a message will arrive without an error?
+
+This is just a complement of the previous item (a), 
+
+$$
+P(\overline{E}) = 1 - P(E)
+$$
+
+Which is
+
+$$
+P(\overline{E}) = 1 - 0.01425
+$$
+
+``` {r}
+1 - 0.01425
+```
+$$
+P(\overline{E}) = 0.98575
+$$
+
+#### (c) If a message arrives without error, what is the probability that it was sent through server 1?
+
+With earlier assumptions, this could be derrived as a conditional probabilty denoted as
+
+$$
+P(A_1 | \overline{E} ) = \frac{P(A_1 \cap \overline{E})}{P(\overline{E})}
+$$
+
+$$
+P(\overline{E} | A_1) = 1 - P(E | A_1)
+$$
+
+$$
+P(\overline{E}|A_1) = 1 - 0.01
+$$
+
+$$
+P(\overline{E}|A_1) = 0.99
+$$
+
+$$
+P(\overline{E} \cap A_1) = P(\overline{E}|A_1)P(A_1)
+$$
+
+$$
+P(\overline{E} \cap A_1) = 0.99 \times 0.40
+$$
+```{r}
+0.99*0.40
+```
+
+$$
+P(\overline{E} \cap A_1) = 0.396
+$$
+
+$$
+P(A_1 | \overline{E} ) = \frac{0.396}{0.98575}
+$$
+
+``` {r}
+0.396/0.98575
+```
+
+$$
+P(A_1 | \overline{E} ) = 0.4017246
+$$
+
+## 2)
+A software company surveyed managers to determine the probability that they would buy a new graphics package that includes three-dimensional graphics. About 20% of office managers were certain that they would not buy the package, 70% claimed that they would buy, and the others were undecided. Of those who said that they would not buy the package, only 10% said that they were interested in upgrading their computer hardware. Of those interested in buying the graphics package, 40% were also interested in upgrading their computer hardware. Of the undecided, 20% were interested in upgrading their computer hardware. 
+
+``` {r}
+item2_table <- data.frame(
+  decision = c("Would Not Buy", "Would Buy", "Undecided"),
+  prob_among_office_managers = c(0.20, 0.70, 0.10),
+  prob_interested_upgrade = c(0.10,0.40,0.20)
+)
+item2_table
+```
+
+Let A denote the intention of not buying, B the intention of buying, C the undecided, and G the intention of upgrading the computer hardware.
+
+#### (a) Calculate the probability that a manager chosen at random will not upgrade the computer hardware $P(G)$ .
+
+By Law of Total Probability and Multiplication Law of Probability, 
+
+$$
+P(G) = P(G | A)P(A) + P(G | B)P(B) + P(G | C)P(C)
+$$
+
+$$
+P(G) = (0.2 \times 0.1) + (0.7 \times 0.4) + (0.1 \times 0.2)
+$$
+``` {r}
+item2_table$decision_intersect_upgrade = item2_table$prob_among_office_managers * item2_table$prob_interested_upgrade
+item2_table
+```
+
+$$
+P(G) = 0.02 + 0.28 + 0.02
+$$
+
+``` {r}
+0.02 + 0.28 + 0.02
+```
+
+$$
+P(G) = 0.32
+$$
+
+#### (b) Explain what is meant by the posterior probability of B given G, P(B|G).
+
+A posterior probability is the revised  probability (from a prior probability) of an event occurring after taking into consideration new information. The posterior probability P(B|G) is useful in updating the probability of event B after obtaining the new evidence P(G). 
+
+
+It is useful for us in decision-making for it will tell us how likely it is that a manager will buy the package now that we know they want to upgrade their hardware P(G).
+
+#### (C) Construct a tree diagram and use it to calculate the following probabilities:
+P(G), P(B|G), P(B|G), P(C|G), P(C|G).
+
+This will be the initial tree.
+
+``` {r}
+library(igraph)
+
+vertices <- c("Manager", "A", "B", "C", "A_G", "A_nG", "B_G", "B_nG", "C_G", "C_nG")
+
+edges <- matrix(c(
+  "Manager", "A",
+  "Manager", "B",
+  "Manager", "C",
+  "A", "A_G",
+  "A", "A_nG",
+  "B", "B_G",
+  "B", "B_nG",
+  "C", "C_G",
+  "C", "C_nG"
+), byrow = TRUE, ncol = 2)
+
+edge_labels <- c("0.2", "0.7", "0.1","0.1", "0.9", "0.4", "0.6", "0.2", "0.8")
+
+g <- graph_from_edgelist(edges, directed = TRUE)
+E(g)$label <- edge_labels
+
+V(g)$label <- vertices
+
+layout <- matrix(c(
+  0, 0, #manager
+  -3, -1, #A
+  0, -1, #B
+  3, -1, #C
+  -4, -2, #AG
+  -2, -2,#AnG
+  -1, -2, #BG
+  1, -2, #BnG
+  2, -2, #CG
+  4, -2 #CnG
+), ncol = 2, byrow = TRUE)
+
+V(g)$x <- layout[,1]
+V(g)$y <- layout[,2]
+
+par(mar = c(0, 0, 3, 0))
+
+plot(g, layout = layout, edge.label = E(g)$label, edge.label.cex = 0.8, vertex.label.cex = 0.8,
+     vertex.shape = "circle", vertex.size = 30, edge.arrow.size = 0.5, 
+     main = "Tree Diagram of Probability for Decision for Manager")
+
+label_coords <- matrix(c(
+  -0.95, 0.66,
+  1.3, -0.38
+), ncol = 2, byrow = TRUE)
+
+
+
+text(label_coords[1,1], label_coords[1,2], labels = "Probability of Buying (or not)", pos = 3, cex = 0.8)
+text(label_coords[2,1], label_coords[2,2], labels = "Probability of Interest for upgrade", pos = 3, cex = 0.8)
+```
+
+##### P(G)
+To calculate for P(G), we just need to sum up all the product of the edgest that lead to G, as was shown in the graph.
+
+``` {r}
+vertices <- c("Manager", "A", "B", "C", "A_G", "A_nG", "B_G", "B_nG", "C_G", "C_nG", "G")
+
+edges <- matrix(c(
+  "Manager", "A",
+  "Manager", "B",
+  "Manager", "C",
+  "A", "A_G",
+  "A", "A_nG",
+  "B", "B_G",
+  "B", "B_nG",
+  "C", "C_G",
+  "C", "C_nG",
+  "A_G", "G",
+  "B_G", "G",
+  "C_G", "G"
+), byrow = TRUE, ncol = 2)
+
+edge_labels <- c("0.2", "0.7", "0.1","0.1", "0.9", "0.4", "0.6", "0.2", "0.8","", "", "")
+
+g <- graph_from_edgelist(edges, directed = TRUE)
+E(g)$label <- edge_labels
+
+V(g)$label <- vertices
+
+layout <- matrix(c(
+  0, 0, #manager
+  -3, -1, #A
+  0, -1, #B
+  3, -1, #C
+  -4, -2, #AG
+  -2, -2,#AnG
+  -1, -2, #BG
+  1, -2, #BnG
+  2, -2, #CG
+  4, -2, #CnG
+  0, -3 #G
+), ncol = 2, byrow = TRUE)
+
+V(g)$x <- layout[,1]
+V(g)$y <- layout[,2]
+
+par(mar = c(0, 0, 3, 0))
+
+plot(g, layout = layout, edge.label = E(g)$label, edge.label.cex = 0.8, vertex.label.cex = 0.8,
+     vertex.shape = "circle", vertex.size = 30, edge.arrow.size = 0.5, 
+     main = "Tree Diagram of Probability for Decision for Manager")
+
+label_coords <- matrix(c(
+  -0.95, 0.66,
+  1.3, 0.08
+), ncol = 2, byrow = TRUE)
+
+
+
+text(label_coords[1,1], label_coords[1,2], labels = "Probability of Buying (or not)", pos = 3, cex = 0.8)
+text(label_coords[2,1], label_coords[2,2], labels = "Probability of Interest for upgrade", pos = 3, cex = 0.8)
+```
+
+``` {r}
+A_G <- 0.2 * 0.1
+B_G <- 0.7 * 0.4
+C_G <- 0.1 * 0.2
+
+G <- A_G + B_G + C_G
+G
+```
+
+Thus, P(G) = 0.32
+
+##### P(B|G)
+
+
+Here, we just need to divide the desired result $(P(B \cap \overline{G})$ ; or the product of edges that lead to B_nG) to the total probability of $\overline{G}$ or $1 - P(G)$.
+
+``` {r}
+vertices <- c("Manager", "A", "B", "C", "A_G", "A_nG", "B_G", "B_nG", "C_G", "C_nG", "nG")
+
+edges <- matrix(c(
+  "Manager", "A",
+  "Manager", "B",
+  "Manager", "C",
+  "A", "A_G",
+  "A", "A_nG",
+  "B", "B_G",
+  "B", "B_nG",
+  "C", "C_G",
+  "C", "C_nG",
+  "B_nG", "nG"
+), byrow = TRUE, ncol = 2)
+
+edge_labels <- c("0.2", "0.7", "0.1","0.1", "0.9", "0.4", "0.6", "0.2", "0.8","")
+
+g <- graph_from_edgelist(edges, directed = TRUE)
+E(g)$label <- edge_labels
+
+V(g)$label <- vertices
+
+layout <- matrix(c(
+  0, 0, #manager
+  -3, -1, #A
+  0, -1, #B
+  3, -1, #C
+  -4, -2, #AG
+  -2, -2,#AnG
+  -1, -2, #BG
+  1, -2, #BnG
+  2, -2, #CG
+  4, -2, #CnG
+  0, -3 #nG
+), ncol = 2, byrow = TRUE)
+
+V(g)$x <- layout[,1]
+V(g)$y <- layout[,2]
+
+par(mar = c(0, 0, 3, 0))
+
+plot(g, layout = layout, edge.label = E(g)$label, edge.label.cex = 0.8, vertex.label.cex = 0.8,
+     vertex.shape = "circle", vertex.size = 30, edge.arrow.size = 0.5, 
+     main = "Tree Diagram of Probability for Decision for Manager")
+
+label_coords <- matrix(c(
+  -0.95, 0.66,
+  1.3, 0.08
+), ncol = 2, byrow = TRUE)
+
+
+
+text(label_coords[1,1], label_coords[1,2], labels = "Probability of Buying (or not)", pos = 3, cex = 0.8)
+text(label_coords[2,1], label_coords[2,2], labels = "Probability of Interest for upgrade", pos = 3, cex = 0.8)
+```
+
+``` {r}
+nG <- 1 - G
+B_nG <- 0.7 * 0.6
+B_given_nG <- B_nG / nG
+B_given_nG
+```
+
+$$
+P(B|\overline{G}) = 0.6176471
+$$
+
+##### P(C|G)
+Just like in the previous items, we just need to divide the desired result $(P(C \cap G)$ ; or the product of edges that lead to C_G) to the total probability of $G$.
+
+``` {r}
+vertices <- c("Manager", "A", "B", "C", "A_G", "A_nG", "B_G", "B_nG", "C_G", "C_nG", "G")
+
+edges <- matrix(c(
+  "Manager", "A",
+  "Manager", "B",
+  "Manager", "C",
+  "A", "A_G",
+  "A", "A_nG",
+  "B", "B_G",
+  "B", "B_nG",
+  "C", "C_G",
+  "C", "C_nG",
+  "C_G", "nG"
+), byrow = TRUE, ncol = 2)
+
+edge_labels <- c("0.2", "0.7", "0.1","0.1", "0.9", "0.4", "0.6", "0.2", "0.8","")
+
+g <- graph_from_edgelist(edges, directed = TRUE)
+E(g)$label <- edge_labels
+
+V(g)$label <- vertices
+
+layout <- matrix(c(
+  0, 0, #manager
+  -3, -1, #A
+  0, -1, #B
+  3, -1, #C
+  -4, -2, #AG
+  -2, -2,#AnG
+  -1, -2, #BG
+  1, -2, #BnG
+  2, -2, #CG
+  4, -2, #CnG
+  0, -3 #nG
+), ncol = 2, byrow = TRUE)
+
+V(g)$x <- layout[,1]
+V(g)$y <- layout[,2]
+
+par(mar = c(0, 0, 3, 0))
+
+plot(g, layout = layout, edge.label = E(g)$label, edge.label.cex = 0.8, vertex.label.cex = 0.8,
+     vertex.shape = "circle", vertex.size = 30, edge.arrow.size = 0.5, 
+     main = "Tree Diagram of Probability for Decision for Manager")
+
+label_coords <- matrix(c(
+  -0.95, 0.66,
+  1.3, 0.08
+), ncol = 2, byrow = TRUE)
+
+
+
+text(label_coords[1,1], label_coords[1,2], labels = "Probability of Buying (or not)", pos = 3, cex = 0.8)
+text(label_coords[2,1], label_coords[2,2], labels = "Probability of Interest for upgrade", pos = 3, cex = 0.8)
+```
+
+``` {r}
+C_G <- 0.1 * 0.2
+C_given_G <- C_G / G
+C_given_G
+```
+
+Thus, P(C|G) = 0.0625
+
+###### $P(\overline{C} | \overline{G})$
+Here, we just need to divide the the $\overline{C}$ that leads nG (or not G), specifically $P(B \cap \overline{G})$ and $P(A \cap \overline{G})$, to the total probability of $\overline{G}$.
+
+``` {r}
+vertices <- c("Manager", "A", "B", "C", "A_G", "A_nG", "B_G", "B_nG", "C_G", "C_nG", "nG")
+
+edges <- matrix(c(
+  "Manager", "A",
+  "Manager", "B",
+  "Manager", "C",
+  "A", "A_G",
+  "A", "A_nG",
+  "B", "B_G",
+  "B", "B_nG",
+  "C", "C_G",
+  "C", "C_nG",
+  "A_nG", "nG",
+  "B_nG", "nG"
+), byrow = TRUE, ncol = 2)
+
+edge_labels <- c("0.2", "0.7", "0.1","0.1", "0.9", "0.4", "0.6", "0.2", "0.8","", "")
+
+g <- graph_from_edgelist(edges, directed = TRUE)
+E(g)$label <- edge_labels
+
+V(g)$label <- vertices
+
+layout <- matrix(c(
+  0, 0, #manager
+  -3, -1, #A
+  0, -1, #B
+  3, -1, #C
+  -4, -2, #AG
+  -2, -2,#AnG
+  -1, -2, #BG
+  1, -2, #BnG
+  2, -2, #CG
+  4, -2, #CnG
+  0, -3 #nG
+), ncol = 2, byrow = TRUE)
+
+V(g)$x <- layout[,1]
+V(g)$y <- layout[,2]
+
+par(mar = c(0, 0, 3, 0))
+
+plot(g, layout = layout, edge.label = E(g)$label, edge.label.cex = 0.8, vertex.label.cex = 0.8,
+     vertex.shape = "circle", vertex.size = 30, edge.arrow.size = 0.5, 
+     main = "Tree Diagram of Probability for Decision for Manager")
+
+label_coords <- matrix(c(
+  -0.95, 0.66,
+  1.3, 0.08
+), ncol = 2, byrow = TRUE)
+
+
+
+text(label_coords[1,1], label_coords[1,2], labels = "Probability of Buying (or not)", pos = 3, cex = 0.8)
+text(label_coords[2,1], label_coords[2,2], labels = "Probability of Interest for upgrade", pos = 3, cex = 0.8)
+```
+
+``` {r}
+A_nG <- 0.2 * 0.9
+nC_nG <- (A_nG+B_nG) / nG
+nC_nG
+```
+
+Thus, $P(\overline{C} | \overline{G}) = 0.8823529$ 
+
+## 3)
+
+A malicious spyware can infect a computer system though the Internet or through email. The spyware comes through the Internet 70% of the time
+and 30% of the time, it gets in through email. If it enters via the Internet the anti-virus detector will detect it with probability 0.6, and via email, it is detected with probability 0.8.
+
+``` {r}
+item3_table <- data.frame(
+  medium = c("Internet", "Email"),
+  prob_as_source_spyware = c(0.70, 0.30),
+  prob_detected = c(0.6, 0.8)
+)
+item3_table
+```
+
+Let A be the event wherein the internet was the source of spyware;
+Let B be the event wherein the email was the source of spyware;
+Let E be the event in which the spyware was detected by the anti-virus detector.
+
+#### (a) What is the probability that this spyware infects the system?
+
+Assuming that the spyware will infect the system if its not detected, 
+
+$$
+P(\overline{E}) = 1- P(E)
+$$
+
+$$
+P(E) = P(E \cap A) + P(E \cap B)
+$$
+
+or 
+
+$$
+P(E) = P(E|A)P(A) + P(E|B)P(B)
+$$
+
+``` {r}
+item3_table
+```
+$$
+P(E) = (0.7 \times 0.6) + (0.3 \times 0.8)
+$$
+
+``` {r}
+item3_table$prob_detected_rel_medium <- item3_table$prob_as_source_spyware * item3_table$prob_detected
+item3_table
+```
+
+$$
+P(E) = 0.42 + 0.24
+$$
+
+``` {r}
+E <- sum(item3_table$prob_detected_rel_medium)
+E
+```
+
+$$
+P(\overline{E}) = 1 - 0.66
+$$
+
+``` {r}
+nE <- 1- E
+nE
+```
+
+$$
+P(\overline{E}) = 0.34
+$$
+
+Thus, the probability of a computer system being infected by software is 0.34.
+
+#### (b) If the spyware is detected, what is the probability that it came through the Internet?
+
+This is a conditional probability that can be denoted as 
+
+$$
+P(A|E) = \frac{P(A \cap E)}{P(E)}
+$$
+
+$$
+P(A|E) = \frac{0.41}{0.66}
+$$
+
+``` {r}
+A_given_E <- item3_table[item3_table$medium == "Internet", ]$prob_detected_rel_medium / E
+A_given_E
+```
+
+$$
+P(A|E) = 0.6363636
+$$
+
+Thus, a spyware detected will came from Internet 63.63% of the time (or with a probability of 0.6363636).
