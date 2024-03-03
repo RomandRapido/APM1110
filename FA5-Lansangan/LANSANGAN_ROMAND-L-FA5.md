@@ -143,7 +143,9 @@ sum(item1_table$Error_Relative_to_Server)
 
     ## [1] 0.01425
 
-The total probability of receiving an email containing an error is $$
+The total probability of receiving an email containing an error is
+
+$$
 P(E) = 0.01425
 $$
 
