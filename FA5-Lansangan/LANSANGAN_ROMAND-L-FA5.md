@@ -808,5 +808,5 @@ $$
 P(A|E) = 0.6363636
 $$
 
-Thus, a spyware detected will came from Internet 63.63% of the time (or
+Thus, a spyware detected will came from Internet 63.64% of the time (or
 with a probability of 0.6363636).
