@@ -15,6 +15,12 @@ $\Sigma_{i=1}^3y_i = 0.12$ . Write a program (user input for $x_i$ and
 $y_1$ ) to calculate the probability that a randomly selected product is
 defective.
 
+Note that your program should render prompt message to satisfy the
+following conditions:
+
+- $(0.10 \leq x_i \leq 0.40) \wedge (\Sigma_{i=1}^3x_i = 1)$
+- $(0.05 \leq y_i \leq 0.10) \wedge (\Sigma_{i=1}^3y_i = 0.12)$
+
 #### Input algorithm for x:
 
     repeat {
@@ -44,7 +50,7 @@ defective.
       halu_y = c()
       while (y <= 3){
         var = as.double(readline(prompt = paste("Enter the probability of Factory ", y, " to produce a defective: ")))
-        if (0.10 <= var && var <= 0.40){
+        if (0.05 <= var && var <= 0.10){
           halu_y = c(halu_y, var)
           y <- y + 1;
         }else{
@@ -228,3 +234,318 @@ The probability that a randomly selected product is defective is:
 $$
 P(E) = 0.047794
 $$
+
+### 3)
+
+By generating 10,000 searches in R, carry out a simulation experiment
+for a search engine going through a list of sites for a given key
+phrase, until the key phrase is found. You should allow your program to
+input the probability p that any site will contain the key phrase.
+
+- Plot the simulated pdf and calculate its mean and variance, and
+- Obtain the simulated conditional distribution of searches when three
+  searches have been carried out without success. Calculate its mean and
+  variance, and satisfy yourself that they are equivalent to the
+  simulated distribution of the complete set.
+
+As test data assume each site has a 60% chance of containing the key
+phrase.
+
+To satisfy yourself that the Markov memoryless property holds, obtain
+estimates of
+
+- $P(X=4|X>4)$ and $P(X=1)$
+- $P(X=5|X>3)$ and $P(X=2)$
+
+where x is the number of searches to the first success.
+
+#### Solution:
+
+So this is problem that begs for geometric distribution simulation.
+
+#### Input algorithm for probability:
+
+`#{r} repeat {   prob <- as.double(readline(prompt = "Enter the probability for success: "))   if (0 <= prob && prob <= 1){     break;   } }`
+
+I shall comment it out and assume the following value as user input (as
+per instruction):
+
+``` r
+prob <- 0.60
+```
+
+#### Simulating the experiment:
+
+``` r
+searches <- 10000
+simulated <- rgeom(searches, prob)
+```
+
+#### Plotting the result:
+
+``` r
+library(ggplot2)
+
+df <- data.frame(Trials = factor(simulated))
+
+ggplot(df, aes(x = Trials, fill = after_stat(count))) +
+  geom_bar(color = "#3e2e42", show.legend = FALSE) + 
+  scale_fill_gradient(low = "#70587a", high = "#8b1ebd") +
+  labs(title = "Histogram of Geometric Distribution",
+       x = "Number of Trials",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        panel.background = element_rect(fill = "#3f3d40"))
+```
+
+![](LANSANGAN_DACANAY-SA1_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+#### Calculating the mean and variance:
+
+``` r
+simulated_mean <- mean(simulated)
+simulated_variance <- var(simulated)
+print(paste("Mean of the simulated experiment: ", simulated_mean))
+```
+
+    ## [1] "Mean of the simulated experiment:  0.6707"
+
+``` r
+print(paste("Variance of the simulated experiment: ", simulated_variance))
+```
+
+    ## [1] "Variance of the simulated experiment:  1.14017552755276"
+
+#### Proving the Markov property holds in geometeric sequence:
+
+Assume that the probability of each website containing the key phrase is
+60% or 0.6.
+
+We must prove: \* $P(X=4|X>4) = P(X=1)$ \* $P(X=5|X>3) = P(X=2)$
+
+For the first part, let us get the P(x=1) and P(x=2) out of the way.
+
+The Probability Density function is defined as the following:
+
+$$
+P(X=x) = q^{x−1}p
+$$
+
+where p is the probability of success, q is the probability of failure
+(1 - p), and x = 1, 2, 3,…
+
+Consequently since p = 0.60, the probability of failure will be q =
+0.40.
+
+###### For P(X=1)
+
+$$
+P(X=1) = 0.40^{1-1} \times 0.60
+$$
+
+$$
+P(X=1) = 0.40^0 \times 0.60
+$$
+
+$$
+P(X=1) = 0.60
+$$
+
+##### For P(X=2)
+
+$$
+P(X=2) = 0.40^{2-1} \times 0.60
+$$
+
+$$
+P(X=2) = 0.40^1 \times 0.60
+$$
+
+``` r
+0.40*0.60
+```
+
+    ## [1] 0.24
+
+$$
+P(X=2) = 0.24
+$$
+
+Then let us now calculate both the conditional probability.
+
+Conditional probability is defined as the following formula:
+
+If A and B are two events in a sample space S, then the conditional
+probability of A given B is defined as
+
+$$
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+Where P(B) \> 0.
+
+##### For P(X=4\|X\>3):
+
+$$
+P(X=4|X>3) = \frac{P(X=4 \cap X>3)}{P(X>3)}
+$$
+
+The $P(X=4 \cap X>4)$ could also be rewritten as P(X=4) because in
+discrete world, x = 4 is the only one that satisfies both x = 4 and x \>
+3.
+
+Also, it is worth nothing that:
+
+$$
+P(X > 3) = 1 - P(X \leq 3)
+$$
+
+With those in mind,
+
+$$
+P(X=4|X>3) = \frac{P(X=4)}{1-P(X \leq 3)}
+$$
+
+$$
+P(X=4) = 0.40^{4-1} \times 0.60
+$$
+
+$$
+P(X=4) = 0.40^3 \times 0.60
+$$
+
+``` r
+(0.40^3) * 0.60
+```
+
+    ## [1] 0.0384
+
+$$
+P(X=4) = 0.0384
+$$
+
+The Cumulative Distribution Function of the geometric sequence is
+defined as:
+
+$$
+P(X \leq x) = 1-q^x
+$$ So,
+
+$$
+1 - P(X \leq 3) = 1 - (1-q^3) = q^3
+$$
+
+Since q = 0.40,
+
+$$
+P(X=4|X>3) = \frac{0.0384}{0.40^3}
+$$
+
+``` r
+0.0384 / (0.40^3)
+```
+
+    ## [1] 0.6
+
+$$
+P(X=4|X>3) = 0.6
+$$
+
+##### For P(X=5\|X\>3):
+
+$$
+P(X=5|X>3) = \frac{P(X=5 \cap X>3)}{P(X>3)} = \frac{P(X=5)}{1-P(X \leq 3)}
+$$
+
+$$
+P(X=5) = 0.40^{5-1} \times 0.60 = 0.40^4 \times 0.60
+$$
+
+``` r
+(0.40^4) * 0.60
+```
+
+    ## [1] 0.01536
+
+$$
+P(X=5) = 0.01536
+$$
+
+$$
+P(X=5|X>3) = \frac{0.01536}{0.40^3}
+$$
+
+``` r
+(0.01536) / (0.40^3)
+```
+
+    ## [1] 0.24
+
+$$
+P(X=5|X>3) = 0.24
+$$
+
+Since $P(X=4|X>3) = P(X=1)$ (both are 0.60) and $P(X=5|X>3) = P(X=2)$
+(both are 0.24) is true, the Markov memoryless property holds in the
+Geometric distribution.
+
+Also, to check the validity of our simulation, lets estimate the
+Probabilities mentioned above.
+
+``` r
+simulated_table <- table(simulated)
+simulated_table
+```
+
+    ## simulated
+    ##    0    1    2    3    4    5    6    7    8   10 
+    ## 6036 2334  957  414  148   75   14   12    9    1
+
+Note that X is assumed to be equals to the nth trial. So, X=1 means that
+it’s the success that happened on the first try. In the simulation, the
+column name indicates the number of failures before achieving the first
+success. Therefore, the first trial is equivalent to “0” in our table.
+
+##### For P(X=4\|X\>3):
+
+``` r
+prob_for_xeq4 <- (sum(simulated_table[names(simulated_table) == 3]) / sum(simulated_table)) 
+prob_for_xgreater3 <- (sum(simulated_table[names(simulated_table) >= 3]) / sum(simulated_table)) 
+prob_for_xeq4 / prob_for_xgreater3
+```
+
+    ## [1] 0.6160714
+
+#### For P(X=1)
+
+``` r
+prob_for_xeq1 <- (sum(simulated_table[names(simulated_table) == 0]) / sum(simulated_table)) 
+prob_for_xeq1
+```
+
+    ## [1] 0.6036
+
+##### For P(X=5\|X\>3):
+
+``` r
+prob_for_xeq5 <- (sum(simulated_table[names(simulated_table) == 4]) / sum(simulated_table)) 
+prob_for_xeq5 / prob_for_xgreater3
+```
+
+    ## [1] 0.2202381
+
+##### For P(X=2)
+
+``` r
+prob_for_xeq2 <- (sum(simulated_table[names(simulated_table) == 1]) / sum(simulated_table)) 
+prob_for_xeq2
+```
+
+    ## [1] 0.2334
+
+Both of which are relatively close to their respective partner and their
+theoretical equivalent.
+
+Therefore validating that the Markov memoryless property also holds on
+our simulation.
