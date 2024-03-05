@@ -57,7 +57,7 @@ $$
 P(E_{1} \cap E_{2}) = P(E_{2}|E_{1})P(E_{1})
 $$
 
-Applying the Mulitiplication Law of Probability to the problem:
+Applying the Multiplication Law of Probability to the problem:
 
 $$
 P(E \cap A_1) = P(E|A_1)P(A_1)
