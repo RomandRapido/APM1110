@@ -309,13 +309,13 @@ simulated_variance <- var(simulated)
 print(paste("Mean of the simulated experiment: ", simulated_mean))
 ```
 
-    ## [1] "Mean of the simulated experiment:  0.6866"
+    ## [1] "Mean of the simulated experiment:  0.6512"
 
 ``` r
 print(paste("Variance of the simulated experiment: ", simulated_variance))
 ```
 
-    ## [1] "Variance of the simulated experiment:  1.14329476947695"
+    ## [1] "Variance of the simulated experiment:  1.08984754475448"
 
 #### Proving the Markov property holds in geometeric sequence:
 
@@ -499,8 +499,8 @@ simulated_table
 ```
 
     ## simulated
-    ##    0    1    2    3    4    5    6    7    8    9 
-    ## 5905 2437  994  397  163   57   28   11    4    4
+    ##    0    1    2    3    4    5    6    7    8    9   10 
+    ## 6098 2313  981  361  145   62   26    8    3    2    1
 
 Note that X is assumed to be equals to the nth trial. So, X=1 means that
 it’s the success that happened on the first try. In the simulation, the
@@ -515,7 +515,7 @@ prob_for_xgreater3 <- (sum(simulated_table[names(simulated_table) >= 3]) / sum(s
 prob_for_xeq4 / prob_for_xgreater3
 ```
 
-    ## [1] 0.5978916
+    ## [1] 0.5947282
 
 #### For P(X=1)
 
@@ -524,7 +524,7 @@ prob_for_xeq1 <- (sum(simulated_table[names(simulated_table) == 0]) / sum(simula
 prob_for_xeq1
 ```
 
-    ## [1] 0.5905
+    ## [1] 0.6098
 
 ##### For P(X=5\|X\>3):
 
@@ -533,7 +533,7 @@ prob_for_xeq5 <- (sum(simulated_table[names(simulated_table) == 4]) / sum(simula
 prob_for_xeq5 / prob_for_xgreater3
 ```
 
-    ## [1] 0.2454819
+    ## [1] 0.2388797
 
 ##### For P(X=2)
 
@@ -542,12 +542,10 @@ prob_for_xeq2 <- (sum(simulated_table[names(simulated_table) == 1]) / sum(simula
 prob_for_xeq2
 ```
 
-    ## [1] 0.2437
+    ## [1] 0.2313
 
 Both of which are relatively close to their respective partner and their
 theoretical equivalent.
 
 Therefore validating that the Markov memoryless property also holds on
 our simulation.
-
-Sample
