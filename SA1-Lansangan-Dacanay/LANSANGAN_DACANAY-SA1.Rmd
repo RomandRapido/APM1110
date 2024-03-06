@@ -472,3 +472,6 @@ prob_for_xeq2
 Both of which are relatively close to their respective partner and their theoretical equivalent.
 
 Therefore validating that the Markov memoryless property also holds on our simulation.
+
+
+Sample
