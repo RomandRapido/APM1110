@@ -1,0 +1,243 @@
+---
+title: "Untitled"
+output:
+  html_document:
+    df_print: paged
+date: "2024-03-11"
+---
+``` {r}
+dataframe <- data.frame(id = 0:1,hello = c(2,3), Hi = c(23, 5))
+any(dataframe$id==2)
+```
+
+``` {r}
+library(shiny)
+library(DT)
+library(shinyalert)
+library(ggplot2)
+
+set.seed(123)
+values <- seq(-3, 3, length.out = 100)
+discrete_values <- round(values)
+
+probabilities <- dnorm(values)
+probabilities <- probabilities / sum(probabilities)
+
+ids <- 1:length(values)
+
+df <- reactiveValues(data = data.frame(id = ids, value = discrete_values, probability = probabilities))
+
+ui <- fluidPage(
+  titlePanel("Summative Assessment 1: Probability and Probability Distribution"),
+  h5("By Romand Lansangan"),
+  tags$head(
+    tags$style(HTML("
+      input { color: blue; } 
+      .dataTables_wrapper .dataTables_filter input { color: black; }
+      .dataTables_wrapper {
+        overflow-x: auto; 
+      }
+      #pdfPlot, #cdfPlot {
+        border: 2px solid #3e2e42;
+        border-radius: 5px;
+      }
+    "))
+  ),
+  sidebarLayout(
+    sidebarPanel(
+      h2("Table Data"),
+      helpText("Input values and their associated probabilities for a univariate discrete random variable."),
+      actionButton("add","Add Row"),
+      br(),
+      useShinyalert(),
+      textInput("removeID", "Remove Row with ID", placeholder = "ID to remove"),
+      div(
+        style = "display: flex; justify-content: space-between; align-items: center;",
+        div(
+          style = "flex: 1; padding-right: 20px; display: flex; align-items: center;",
+          actionButton("remove", "Remove", style = "color: red;")
+        ),
+        div(
+          style = "flex: 1; display: flex; align-items: center;",
+          actionButton("removeAll", "Clear All Data", style = "color: red;")
+        )
+      ),
+      br(),
+      DTOutput("dataTable"),
+      actionButton("submit", "Submit Data", style = "color: green;")
+    ),
+    mainPanel(
+      h3("Item #2 for Univariate Discrete Random Variable", align = "center"),
+      div(
+        style = "display: flex; justify-content: space-between; align-items: center;",
+        div(
+          style = "flex: 1; padding-right: 20px; display: flex; align-items: center;",
+          h5("Mean:"),
+          textOutput("mean", container = span)
+        ),
+        div(
+          style = "flex: 1; display: flex; align-items: center;",
+          h5("Variance:"),
+          textOutput("var", container = span)
+        )
+      ),
+      plotOutput("pdfPlot"),
+      plotOutput("cdfPlot")
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$dataTable <- renderDT({
+  datatable(df$data, editable = TRUE,rownames = FALSE,options = list(pageLength = 5, responsive = TRUE, autoWidth = TRUE), 
+            class = 'cell-border stripe')
+    }, server = FALSE)
+  observeEvent(input$dataTable_cell_edit, {
+    info <- input$dataTable_cell_edit
+    str(info)
+    i <- info$row
+    j <- info$col + 1
+    v <- info$value
+    if (j == 1){
+      if(!any(df$data$id == v)){
+          df$data[i, j] <<- DT::coerceValue(v, df$data[i, j])
+      }else{
+        shinyalert("id should be unique")
+        output$dataTable <- renderDT({
+          datatable(df$data, editable = TRUE, rownames = FALSE,options = list(pageLength = 5, responsive = TRUE, autoWidth = TRUE), 
+                    class = 'cell-border stripe')
+            }, server = FALSE)
+      }
+    }else if(j==3){
+      if (v <= 1 && v >= 0){
+          df$data[i, j] <<- DT::coerceValue(v, df$data[i, j])
+      }else{
+        shinyalert("probability (P) should be 0<=P<=1")
+        output$dataTable <- renderDT({
+          datatable(df$data, editable = TRUE, rownames = FALSE,options = list(pageLength = 5, responsive = TRUE, autoWidth = TRUE), 
+                    class = 'cell-border stripe')
+          }, server = FALSE)
+      }
+    }else{
+      df$data[i, j] <<- DT::coerceValue(v, df$data[i, j])
+    }
+  })
+
+  observeEvent(input$add, {
+    addThis <- data.frame(id = max(df$data$id) + 1, value = c(0), probability = c(0.00))
+    df$data <-rbind(df$data, addThis)
+  })
+  
+  observeEvent(input$remove, {
+    idToBeRemoved <- input$removeID
+    if (!is.null(idToBeRemoved) && idToBeRemoved != ""){
+      idAsNum <- as.numeric(idToBeRemoved)
+      if (!is.na(idAsNum) && idAsNum%%1==0) {
+          df$data <- df$data[df$data$id != as.numeric(idToBeRemoved), ]
+      }else{
+        shinyalert("id should be integer")
+      }
+    }
+  })
+  
+  observeEvent(input$removeAll, {
+    df$data <- data.frame(id = c(0), value = c(0), probability = c(1))
+  })
+  
+  stats <- reactiveValues(meanVal = NA, varVal = NA, updatePlots = FALSE)
+  
+  observeEvent(input$submit, {
+    if (sum(df$data$probability) == 1){
+      stats$meanVal <- mean(df$data$value, na.rm = TRUE)
+      stats$varVal <- var(df$data$value, na.rm = TRUE)
+      output$pdfPlot <- renderPlot({
+        isolate(dfCopy <- df$data)
+        ggplot(dfCopy, aes(x = value, weight = probability)) +
+          geom_density(alpha = 0.5, color = "#3e2e42", fill = "#8b1ebd") +
+          labs(title = "PDF: Probability Density Function",
+               x = "Value",
+               y = "Density") +
+          theme_minimal() +
+          theme(plot.title = element_text(hjust = 0.5),
+                panel.background = element_rect(fill = "#3f3d40"))
+      })
+    
+      output$cdfPlot <- renderPlot({
+        isolate(dfCopy <- df$data)
+        dfCopy <- dfCopy[order(dfCopy$value), ]
+        dfCopy$cumprob <- cumsum(dfCopy$probability) / sum(dfCopy$probability)
+          ggplot(dfCopy, aes(x = value, y = cumprob)) +
+            geom_area(alpha = 0.5, color = "#8b1ebd", fill = "#8b1ebd") +
+            labs(title = "CDF: Cumulative Distribution Function",
+                 x = "Value",
+                 y = "Cumulative Probability") +
+            theme_minimal() +
+            theme(plot.title = element_text(hjust = 0.5),
+                  panel.background = element_rect(fill = "#3f3d40"))
+        })
+      }else{
+      shinyalert("the sum of all probability should be 1") 
+    }
+  })
+  
+  output$mean <- renderText({
+    stats$meanVal<- mean(df$data$value, na.rm = TRUE)
+  })
+  
+  output$var <- renderText({
+    stats$varVal <- var(df$data$value, na.rm = TRUE)
+  })
+  
+  isolate({
+    output$pdfPlot <- renderPlot({
+        isolate(dfCopy <- df$data)
+        ggplot(dfCopy, aes(x = value, weight = probability)) +
+          geom_density(alpha = 0.5, color = "#3e2e42", fill = "#8b1ebd") +
+          labs(title = "PDF: Probability Density Function",
+               x = "Value",
+               y = "Density") +
+          theme_minimal() +
+          theme(plot.title = element_text(hjust = 0.5),
+                panel.background = element_rect(fill = "#3f3d40"))
+      })
+    
+      output$cdfPlot <- renderPlot({
+        isolate(dfCopy <- df$data)
+        dfCopy <- dfCopy[order(dfCopy$value), ]
+        dfCopy$cumprob <- cumsum(dfCopy$probability) / sum(dfCopy$probability)
+          ggplot(dfCopy, aes(x = value, y = cumprob)) +
+            geom_area(alpha = 0.5, color = "#8b1ebd", fill = "#8b1ebd") +
+            labs(title = "CDF: Cumulative Distribution Function",
+                 x = "Value",
+                 y = "Cumulative Probability") +
+            theme_minimal() +
+            theme(plot.title = element_text(hjust = 0.5),
+                  panel.background = element_rect(fill = "#3f3d40"))
+        })
+  })
+  }
+
+shinyApp(ui = ui, server = server)
+
+```
+
+``` {r}
+# Assuming the same setup for generating 'values'
+set.seed(123)  # Ensure reproducibility
+values <- seq(-3, 3, length.out = 100)
+probabilities <- dnorm(values)  # Density for these values under a standard normal distribution
+
+# Normalize the probabilities so they sum to 1
+probabilities <- probabilities / sum(probabilities)
+
+dff <- data.frame(id = 1:length(values), value = values, probability = probabilities)
+ggplot(dff, aes(x = value, weight = probability)) +
+    geom_density(alpha = 0.5, color = "#3e2e42", fill = "#8b1ebd") +
+    labs(title = "PDF: Probability Distribution",
+         x = "Value",
+         y = "Density") +
+    theme_minimal() +
+    theme(plot.title = element_text(hjust = 0.5),
+          panel.background = element_rect(fill = "#3f3d40"))
+
+```
