@@ -791,27 +791,39 @@ program, do validity checks that the probabilities are in the interval
     shinyApp(ui = ui, server = server)
 
 This is a rather fun project to work on I must say. I will provide a
-link for the R file for you to run the application yourself.
-Nevertheless, I will explain the functionality here.
+link for the [R
+File](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/LANSANGAN_ROMAND-SA1-item2.r)
+for you to run the application yourself. Nevertheless, I will explain
+the functionality here.
 
 ##### Features:
 
 To navigate the website more comfortably, please maximize your window.
 
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_1.JPG?raw=true)
+
 This application offers two modes: UNIVARIATE and BIVARIATE, as per your
 instruction. You can switch between these modes using the dropdown box
 at the top left of your screen.
+
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_2.JPG?raw=true)
 
 Add Row/Values: In the UNIVARIATE mode, you’ll find an “Add Row” button
 to add new rows with empty values to the table below. In the BIVARIATE
 mode, you’ll find separate buttons to add X and Y values.
 
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_3.JPG?raw=true)
+
 “Remove All” clears the entire table to its default state for easier
 customization. “Remove” button deletes the row or column specified in
 the text box above it. Table Section:
 
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_4.JPG?raw=true)
+
 The table allows you to edit values. Ensure that values are discrete,
 and probabilities fall within the range of \[0, 1\].
+
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_5.JPG?raw=true)
 
 After editing values, click the “Submit” button. The app checks if the
 probabilities sum up to 1. If they don’t, a message will pop up. If
@@ -913,13 +925,13 @@ simulated_variance <- var(simulated)
 print(paste("Mean of the simulated experiment: ", simulated_mean))
 ```
 
-    ## [1] "Mean of the simulated experiment:  0.6593"
+    ## [1] "Mean of the simulated experiment:  0.6511"
 
 ``` r
 print(paste("Variance of the simulated experiment: ", simulated_variance))
 ```
 
-    ## [1] "Variance of the simulated experiment:  1.07673118311831"
+    ## [1] "Variance of the simulated experiment:  1.08367715771577"
 
 #### Proving the Markov property holds in geometeric sequence:
 
@@ -1103,8 +1115,8 @@ simulated_table
 ```
 
     ## simulated
-    ##    0    1    2    3    4    5    6    7    8    9 
-    ## 6007 2404  983  362  143   58   31    8    3    1
+    ##    0    1    2    3    4    5    6    7    8    9   10 
+    ## 6062 2399  899  399  153   59   10    9    6    1    3
 
 Note that X is assumed to be equals to the nth trial. So, X=1 means that
 it’s the success that happened on the first try. In the simulation, the
@@ -1119,7 +1131,7 @@ prob_for_xgreater3 <- (sum(simulated_table[names(simulated_table) >= 3]) / sum(s
 prob_for_xeq4 / prob_for_xgreater3
 ```
 
-    ## [1] 0.5973597
+    ## [1] 0.6263736
 
 #### For P(X=1)
 
@@ -1128,7 +1140,7 @@ prob_for_xeq1 <- (sum(simulated_table[names(simulated_table) == 0]) / sum(simula
 prob_for_xeq1
 ```
 
-    ## [1] 0.6007
+    ## [1] 0.6062
 
 ##### For P(X=5\|X\>3):
 
@@ -1137,7 +1149,7 @@ prob_for_xeq5 <- (sum(simulated_table[names(simulated_table) == 4]) / sum(simula
 prob_for_xeq5 / prob_for_xgreater3
 ```
 
-    ## [1] 0.2359736
+    ## [1] 0.2401884
 
 ##### For P(X=2)
 
@@ -1146,7 +1158,7 @@ prob_for_xeq2 <- (sum(simulated_table[names(simulated_table) == 1]) / sum(simula
 prob_for_xeq2
 ```
 
-    ## [1] 0.2404
+    ## [1] 0.2399
 
 Both of which are relatively close to their respective partner and their
 theoretical equivalent.

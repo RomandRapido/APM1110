@@ -756,20 +756,30 @@ server <- function(input, output, session) {
 shinyApp(ui = ui, server = server)
 ```
 
-This is a rather fun project to work on I must say. I will provide a link for the R file for you to run the application yourself. Nevertheless, I will explain the functionality here.
+This is a rather fun project to work on I must say. I will provide a link for the [R File](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/LANSANGAN_ROMAND-SA1-item2.r) for you to run the application yourself. Nevertheless, I will explain the functionality here.
 
 ##### Features:
 To navigate the website more comfortably, please maximize your window.
 
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_1.JPG?raw=true)
+
 This application offers two modes: UNIVARIATE and BIVARIATE, as per your instruction. You can switch between these modes using the dropdown box at the top left of your screen.
 
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_2.JPG?raw=true)
+
 Add Row/Values: In the UNIVARIATE mode, you'll find an "Add Row" button to add new rows with empty values to the table below. In the BIVARIATE mode, you'll find separate buttons to add X and Y values.
+
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_3.JPG?raw=true)
 
 "Remove All" clears the entire table to its default state for easier customization.
 "Remove" button deletes the row or column specified in the text box above it.
 Table Section:
 
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_4.JPG?raw=true)
+
 The table allows you to edit values. Ensure that values are discrete, and probabilities fall within the range of [0, 1].
+
+![](https://github.com/RomandRapido/APM1110/blob/main/SA1-Lansangan/LANSANGAN_ROMAND-SA1_files/figure-gfm/2_5.JPG?raw=true)
 
 After editing values, click the "Submit" button. The app checks if the probabilities sum up to 1. If they don't, a message will pop up. If successful, it displays necessary details on the main panel.
 
