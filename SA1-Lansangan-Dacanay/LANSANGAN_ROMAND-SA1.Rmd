@@ -204,7 +204,7 @@ With your own computing experience, develop a front end to R that allows the use
 
 ##### to input the values of a univariate discrete random variable and the associated probabilities and to obtain the mean and variance, and
 
-``` {r}
+``` 
 uiOption2 <- function() {
   sidebarLayout(
     sidebarPanel(
@@ -399,7 +399,7 @@ serverOption1 <- function(input, output, session) {
 
 #### to input the values of a bivariate discrete random variable and the associated probabilities and to obtain the marginal and conditional distributions.
 
-``` {r}
+``` 
 uiOption2 <- function() {
   sidebarLayout(
     sidebarPanel(
@@ -694,7 +694,7 @@ serverOption2 <- function(input, output, session) {
 
 Your program should provide a facility to calculate the mean and variance of each distribution, and to plot the pdf and cdf. In each program, do validity checks that the probabilities are in the interval [0, 1], and that they sum to one.
 
-``` {r}
+``` 
 library(shiny)
 library(DT)
 library(shinyalert)
